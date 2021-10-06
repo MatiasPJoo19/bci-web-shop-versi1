@@ -48,7 +48,16 @@ const ItemInfoValidateMw = function(req, res, next) {
         res.sendStatus(400);
     }
 }
-
+function apiKeySecurity (req, res, next) {
+    if(req.get('my-api-key') == 123456){
+        console.log('this is api key is valid')
+        next();
+    }else{
+        console.log('this api key is not valid')
+        res.sendStatus(401);
+    }
+    
+}
 const Items = [
 {  
             "id": uuidv4(),
@@ -109,7 +118,7 @@ if(validationResult == true) {
 res.sendStatus(201);
 
 }})
-app.put('/items/:id', ItemInfoValidateMw, (req, res) => {
+app.put('/items/:id', ItemInfoValidateMw, apiKeySecurity, (req, res) => {
 
     const validationResult2 = ItemInfoValidator(req.body);
 if(validationResult2 == true) {
