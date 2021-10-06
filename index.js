@@ -38,10 +38,9 @@ const Items = [
  
 ];
 app.get('/', (req, res) => {
-    res.send('Link to stoplight')
-    res.send('https://matiaspar-oamk.stoplight.io/docs/cloud-integration-graded-exercise/YXBpOjIzMjY3NjQz-web-store')
-    res.send('Link to github')
-    res.send('https://github.com/MatiasPJoo19/bci-web-shop-versi1')
+    res.send('Link to stoplight, "https://matiaspar-oamk.stoplight.io/docs/cloud-integration-graded-exercise/YXBpOjIzMjY3NjQz-web-store"')
+    
+    
   })
 app.get('/items', (req, res) => {
     
