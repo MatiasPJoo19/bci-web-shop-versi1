@@ -4,13 +4,13 @@ const app = express()
 const bodyParser = require('body-parser');  //bodyParser implementation
 const Ajv = require('ajv');
 const ajv = new Ajv();
-const port = 3000       //local 3000 port
+//const port = 3000       //local 3000 port
 
 const ItemsInfoSchema = require('./schemas/Items.schema.json')
 const ItemInfoValidator = ajv.compile(ItemsInfoSchema);
 
 app.use(bodyParser.json());
-
+app.set('port', (process.env.PORT || 3000));
 const ItemInfoValidateMw = function(req, res, next) {
 
     const validationResult = ItemInfoValidator(req.body);
@@ -66,6 +66,9 @@ if(validationResult == true) {
 res.sendStatus(201);
 
 }})
-app.listen(port, () => {
+/*app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
-})
+})*/
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
+});
