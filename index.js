@@ -75,6 +75,17 @@ app.get('/items', (req, res) => {
         res.json(Items);
 })
 
+app.get('/items/:id', (req, res) => {
+    const item = Items.find(d => d.id === req.params.id);
+    if(item.id === undefined){
+        res.sendStatus(404);
+        
+    }else {
+        res.json(item);
+    }
+
+})
+
 app.post('/items', ItemInfoValidateMw, (req, res) => {
 
     const validationResult = ItemInfoValidator(req.body);
@@ -91,6 +102,25 @@ if(validationResult == true) {
     releaseDate: req.body.releaseDate,
     phoNumber: req.body.phoNumber,
     category: req.body.category,
+    shipping: req.body.shipping
+    
+
+});
+res.sendStatus(201);
+
+}})
+app.put('/items/:id', ItemInfoValidateMw, (req, res) => {
+
+    const validationResult2 = ItemInfoValidator(req.body);
+if(validationResult2 == true) {
+    Items.push({
+    title: req.body.title,
+    description: req.body.description,
+    city: req.body.city,
+    photo: req.body.photo,
+    priceRequest: req.body.priceRequest,
+    releaseDate: req.body.releaseDate,
+    phoNumber: req.body.phoNumber,
     shipping: req.body.shipping
     
 
