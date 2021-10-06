@@ -6,6 +6,9 @@ const Ajv = require('ajv');
 const ajv = new Ajv();
 const bcrypt = require('bcryptjs');
 const users = require('./services/users');
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+const multer = require('multer');
 //const port = 3000       //local 3000 port
 
 const ItemsInfoSchema = require('./schemas/Items.schema.json')
@@ -74,6 +77,25 @@ const Items = [
     }
  
 ];
+
+// Config cloudinary storage for multer-storage-cloudinary
+/*const storage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: '', // give cloudinary folder where you want to store images
+    allowedFormats: ['jpg', 'png'],
+  });
+
+  const parser = multer({ storage: storage });
+
+
+//cloudinary ei voinut asetta herokuun ilman verifioitua kättäjätunusta
+
+
+  app.post('/upload', parser.single('image'), function (req, res) {
+    console.log(req.file);
+    res.status(201);
+    res.json(req.file);
+});*/
 app.get('/', (req, res) => {
     res.send('Link to stoplight, "https://matiaspar-oamk.stoplight.io/docs/cloud-integration-graded-exercise/YXBpOjIzMjY3NjQz-web-store"')
     
